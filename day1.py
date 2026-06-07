@@ -4,9 +4,8 @@ BASEMENT = -1
 
 def number1_1():
     dataFile = open("data/day1.txt", "r")
-
-    for line in dataFile:
-        s_line = line.replace("\n", "")
+   
+    s_line = dataFile.readline().replace("\n", "")
 
     i_up = s_line.count("(")
     i_down = s_line.count(")")
@@ -19,8 +18,7 @@ def number1_1():
 def number1_2():
     dataFile = open("data/day1.txt", "r")
 
-    for line in dataFile:
-        s_line = line.replace("\n", "")
+    s_line = dataFile.readline().replace("\n", "")
 
     l_line = list(s_line)
     i_floor = 0
