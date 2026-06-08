@@ -1,5 +1,3 @@
-import re
-
 def hasEnoughVocals(chain):
     i_vocals = chain.count("a") + chain.count("e") + chain.count("i") + chain.count("o") + chain.count("u")
     
