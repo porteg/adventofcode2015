@@ -3,24 +3,31 @@ OR = "OR"
 LSHIFT = "LSHIFT"
 RSHIFT = "RSHIFT"
 NOT = "NOT"
+MASK = 65535
+NUM_BITS = 16
 
+def bit_not(value, numbits=NUM_BITS):
+    return (1 << numbits) - 1 - value
+    
 def getOperationValue(operation, value_1, value_2):
-    b_value_1 = bin(int(value_1))
+    # b_value_1 = bin(int(value_1))
+    b_value_1 = int(value_1)
     if value_2:
-        b_value_2 = bin(int(value_2))
+        # b_value_2 = bin(int(value_2))
+        b_value_2 = int(value_2)
     
     if operation == AND:
         aux = b_value_1 & b_value_2
     elif operation == OR:
         aux = b_value_1 | b_value_2
     elif operation == LSHIFT:
-        aux = b_value_1 << b_value_2
+        aux = (b_value_1 << b_value_2) & MASK
     elif operation == RSHIFT:
         aux = b_value_1 >> b_value_2
     else:
-        aux = ~b_value_1
+        aux = bit_not(b_value_1)
 
-    return str(int(aux))
+    return str(aux)
 
 def number7_1():    
     dataFile = open("data/day7.txt", "r")
@@ -77,7 +84,10 @@ def number7_1():
                 else:
                     if value_1 in values.keys():
                         values[wire] = values[value_1]
+                    else:
+                        aux.append((value_1, operation, value_2, wire))
         operations = aux.copy()
 
+    print("Result day 7 part 1: The a value is " + str(values["a"]))
 
 number7_1()
