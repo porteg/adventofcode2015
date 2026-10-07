@@ -49,7 +49,6 @@ def number14_2():
                 reindeers[r_names[i]][SCORE] += 1
             l_scores.append(reindeers[r_names[i]][SCORE])
 
-
     print("Result Day 14 part 2: The score of the winner " + leader + " has been " + str(max(l_scores)))
 
 
