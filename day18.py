@@ -54,5 +54,49 @@ def number18_1():
     i_ligths_on = getLights(current_grid, ON)
     
     print("Day 18 part 1: Number of lights ON -> " + str(i_ligths_on))
+
+def number18_2():
+    dataFile = open("data/day18.txt", "r")
     
+    current_grid = []
+    
+    for s_line in dataFile:
+        s_line = s_line.replace("\n", "")
+        current_grid.append(list(s_line))
+
+    current_grid[0][0] = ON
+    current_grid[0][len(current_grid[0]) - 1] = ON
+    current_grid[len(current_grid) - 1][0] = ON
+    current_grid[len(current_grid) - 1][len(current_grid[0]) - 1] = ON
+    
+    steps = 100
+    
+    for time in range(0, steps):
+        aux_grid = []
+        for row in range(0, len(current_grid)):
+            aux_grid.append(current_grid[row].copy())
+            
+        for row in range(0, len(current_grid)):
+            for col in range(0, len(current_grid[0])):
+                if turnOn(current_grid, row, col):
+                    aux_grid[row][col] = ON
+                else:
+                    aux_grid[row][col] = OFF
+        
+        current_grid = []
+        for row in range(0, len(aux_grid)):
+            current_grid.append(aux_grid[row].copy())
+        
+        current_grid[0][0] = ON
+        current_grid[0][len(current_grid[0]) - 1] = ON
+        current_grid[len(current_grid) - 1][0] = ON
+        current_grid[len(current_grid) - 1][len(current_grid[0]) - 1] = ON
+            
+    i_ligths_on = getLights(current_grid, ON)
+    
+    print("Day 18 part 2: Number of lights ON -> " + str(i_ligths_on))
+    
+
+
 number18_1()
+number18_2()
